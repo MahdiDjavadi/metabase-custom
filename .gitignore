@@ -1,0 +1,12 @@
+.env
+
+*.log
+
+backup/
+*.tar
+*.tar.gz
+
+.idea/
+.vscode/
+
+.DS_Store

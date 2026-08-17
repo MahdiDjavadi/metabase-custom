@@ -20,14 +20,16 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: metabase/metabase
-          ref: v0.60.7
+          ref: v0.63.2
           path: metabase-source
 
       - name: Fix Metabase Dockerfile Bug & Inject Custom Assets
         run: |
           cd metabase-source
-          sed -i 's/\.\/linux-install-1.12.0.1488.sh/.\/linux-install-1.12.0.1488.sh \\/g' Dockerfile
-
+          # اصلاح احتمال باگ لینوکس‌انستالر در داکرفایل
+          sed -i 's/\.\/linux-install-1.12.0.1488.sh/.\/linux-install-1.12.0.1488.sh \\/g' Dockerfile || true
+          
+          # کپی فونت‌ها و استایل‌ها به مسیر فرانت‌اند
           cd ..
           cp fonts/* metabase-source/resources/frontend_client/
           cp custom-styles.css metabase-source/resources/frontend_client/custom-styles.css
@@ -35,7 +37,7 @@ jobs:
       - name: Build Docker Image
         run: |
           cd metabase-source
-          docker build --build-arg VERSION=v0.60.7 -t my-metabase:custom .
+          docker build --build-arg VERSION=v0.63.2 -t my-metabase:custom .
 
       - name: Save Artifact
         run: |

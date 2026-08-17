@@ -1,0 +1,48 @@
+name: Full Custom Metabase Build
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Your Files
+        uses: actions/checkout@v4
+
+      - name: Checkout Metabase Source
+        uses: actions/checkout@v4
+        with:
+          repository: metabase/metabase
+          ref: v0.60.7
+          path: metabase-source
+
+      - name: Fix Metabase Dockerfile Bug & Inject Custom Assets
+        run: |
+          cd metabase-source
+          sed -i 's/\.\/linux-install-1.12.0.1488.sh/.\/linux-install-1.12.0.1488.sh \\/g' Dockerfile
+
+          cd ..
+          cp fonts/* metabase-source/resources/frontend_client/
+          cp custom-styles.css metabase-source/resources/frontend_client/custom-styles.css
+
+      - name: Build Docker Image
+        run: |
+          cd metabase-source
+          docker build --build-arg VERSION=v0.60.7 -t my-metabase:custom .
+
+      - name: Save Artifact
+        run: |
+          docker save my-metabase:custom | gzip > metabase-custom.tar.gz
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: metabase-image
+          path: metabase-custom.tar.gz

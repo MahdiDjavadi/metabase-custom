@@ -1,5 +1,75 @@
+/* وارد کردن فونت ایران‌یکان */
 @import url('/app/assets/fonts/font-iran-yekan.css');
 
-body, h1, h2, h3, h4, p, span, div, button, input, select {
+/* ۱. اعمال فونت به تمامی بخش‌ها */
+body, h1, h2, h3, h4, h5, h6, p, span, div, button, input, select, textarea, a {
     font-family: 'IRANYekan', sans-serif !important;
+}
+
+/* ۲. تعریف متغیرهای رنگی بر اساس تم GitHub Dark */
+:root {
+    --color-bg-main: #0d1117 !important;
+    --color-bg-card: #161b22 !important;
+    --color-bg-header: #010409 !important;
+    --color-border: #30363d !important;
+    
+    --color-text-primary: #e6edf3 !important;
+    --color-text-secondary: #848d97 !important;
+    
+    --color-brand: #2f81f7 !important;
+    --color-accent-blue: #2f81f7 !important;
+    --color-accent-green: #238636 !important;
+    --color-accent-orange: #f0883e !important;
+}
+
+/* ۳. اعمال استایل مستقیم روی المان‌های اصلی متابیس */
+body {
+    background-color: #0d1117 !important;
+    color: #e6edf3 !important;
+}
+
+/* هدر اصلی بالایی */
+header, nav, [class*="Header"] {
+    background-color: #010409 !important;
+    border-bottom: 1px solid #30363d !important;
+}
+
+/* کارت‌ها، باکس‌ها، جدول‌ها و فیلدها */
+div[class*="Card"], 
+div[class*="Box"], 
+div[class*="Table"], 
+fieldset, 
+input, 
+select {
+    background-color: #161b22 !important;
+    border-color: #30363d !important;
+    color: #e6edf3 !important;
+}
+
+/* بوردرهای داخلی و خارجی */
+* {
+    border-color: #30363d !important;
+}
+
+/* متون فرعی، متاداده‌ها و آیکون‌های کم‌رنگ */
+small, time, [class*="muted"], [class*="secondary"] {
+    color: #848d97 !important;
+}
+
+/* لینک‌ها و بخش‌های فعال (آبی گیت‌هاب) */
+a, [class*="Link"] {
+    color: #2f81f7 !important;
+}
+
+/* دکمه‌های تایید و عملیاتی (سبز گیت‌هاب) */
+button[class*="primary"], button[type="submit"] {
+    background-color: #238636 !important;
+    border-color: rgba(240, 246, 252, 0.1) !important;
+    color: #ffffff !important;
+}
+
+/* برچسب‌ها و وضعیت‌ها (نارنجی گیت‌هاب) */
+[class*="badge"], [class*="status-orange"] {
+    background-color: rgba(240, 136, 62, 0.15) !important;
+    color: #f0883e !important;
 }

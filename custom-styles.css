@@ -1,0 +1,5 @@
+@import url('/app/assets/fonts/font-iran-yekan.css');
+
+body, h1, h2, h3, h4, p, span, div, button, input, select {
+    font-family: 'IRANYekan', sans-serif !important;
+}
